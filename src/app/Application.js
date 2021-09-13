@@ -41,10 +41,11 @@ export default class Application extends EventEmitter {
       const res = await fetch(next);
       const planets = await res.json();
       next = planets.next;
+      this.data.count = planets.count;
       this.data.planets = [...this.data.planets, ...planets.results];
     } while (next);
 
-    // console.log(this.data.planets);
+    console.log(this.data.count);
 
     this.emit(Application.events.APP_READY);
   }
